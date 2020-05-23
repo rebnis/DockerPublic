@@ -1,0 +1,22 @@
+# escape=`
+FROM mcr.microsoft.com/windows/servercore:ltsc2016
+
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+EXPOSE 3050
+VOLUME C:/Data
+
+ENV FIREBIRD_HOME="C:\Program Files (x86)\Firebird\Firebird_2_0"
+
+# Install Firebird and set PATH for easy access to Firebird tools
+RUN Invoke-WebRequest -UseBasicParsing `
+		-Uri "http://sourceforge.mirrorservice.org/f/fi/firebird/firebird-win32/2.0.7-Release/Firebird-2.0.7.13318_0_win32.exe" `
+		-OutFile firebird.exe ; `
+	Start-Process -Wait "firebird.exe" -ArgumentList /silent ; `
+	Remove-Item -Force firebird.exe ; `
+	$env:path = $env:path + ';' + $env:FIREBIRD_HOME +'\bin' ; `
+	setx /M PATH $env:path ;
+
+COPY Scripts\* c:\
+
+ENTRYPOINT ["powershell.exe", "c:\\entrypoint.ps1"]

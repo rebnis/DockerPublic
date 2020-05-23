@@ -1,0 +1,28 @@
+# escape=`
+FROM mcr.microsoft.com/windows/servercore:ltsc2016
+
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+EXPOSE 3050
+VOLUME C:/Data
+
+ENV FIREBIRD_HOME="C:\Program Files\Firebird\Firebird_3_0"
+
+# Install Firebird and set PATH for easy access to Firebird tools
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 ; `
+	Invoke-WebRequest -UseBasicParsing `
+		-Uri "https://github.com/FirebirdSQL/firebird/releases/download/R3_0_5/Firebird-3.0.5.33220_0_x64.exe" `
+		-OutFile firebird.exe ; `
+	Start-Process -Wait firebird.exe -ArgumentList /silent ; `
+	Remove-Item -Force firebird.exe ; `
+	$env:path = $env:path + ';' + $env:FIREBIRD_HOME ; `
+	setx /M PATH $env:path ; `
+	# Enable WireCrypt
+	$configFile = $env:FIREBIRD_HOME +'\firebird.conf' ; `
+	$config = Get-Content $configFile ; `
+   	$config = $config -replace '#WireCrypt = Enabled (for client) / Required (for server)', 'WireCrypt = Enabled' ; `
+    Set-Content $configFile $config ;
+
+COPY Scripts\* c:\
+
+ENTRYPOINT ["powershell.exe", "c:\\entrypoint.ps1"]
