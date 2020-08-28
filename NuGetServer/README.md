@@ -19,18 +19,18 @@ The port used to access the service, i.e. 85, must be set for Default Web Site i
 
 ## Managing packages
 
-* Add URL to the feed  http://<servername>:85/nuget to Visual Studio, NuGet.config etc.
+* Add URL to the feed  http://servername:85/nuget to Visual Studio, NuGet.config etc.
 
 ### Push package
 
 ```cmd
-nuget push C:\AppSource\MyPackage.1.2.3.nupkg -apikey nugetkey -source http://<servername>:85/nuget
+nuget push C:\AppSource\MyPackage.1.2.3.nupkg -apikey nugetkey -source http://servername:85/nuget
 ```
 
 ### Delete package
 
 ```cmd
-nuget delete MyPackage 1.2.3 -apikey nugetkey -source http://<servername>:85/nuget -NonInteractive
+nuget delete MyPackage 1.2.3 -apikey nugetkey -source http://servername:85/nuget -NonInteractive
 ```
 
 ## Server Source
@@ -42,13 +42,6 @@ A simple web server to show a NuGet package feed
 * Open the solution in Visual Studio and perform NuGet package upgrade
 * Run BuildProject.cmd to build and copy files to the Deploy folder
 * Build a new Docker image
-
-## Version
-
-Tag "latest" uses following versions:
-
-* Windows Server 2016 (servercore:ltsc2016)
-* NuGet Server 3.4.1
 
 ## Links
 

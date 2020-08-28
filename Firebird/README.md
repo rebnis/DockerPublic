@@ -2,8 +2,6 @@
 
 Firebird open source database.
 
-Images for 2.0, 2.5 and 3.0 available.
-
 [Dockerfiles](https://github.com/rebnis/DockerPublic/tree/master/Firebird)
 
 ## Using
@@ -13,7 +11,7 @@ docker run -d `
 -p 3050:3050 `
 -v D:\Databases:C:\Data `
 -e Aliases="alias1=c:\data\myDb1.fdb;alias2=c:\data\myDb2.fdb" `
-rebnis/firebird:3.0-x64-ltsc2016
+rebnis/firebird
 ```
 
 * Multiple aliases can be set by separating with ;
@@ -36,7 +34,7 @@ Included cmd-scripts can be used to perform a backup or restore with default val
 ```powershell
 docker run -it `
 -v D:\Databases:C:\Data `
-rebnis/firebird:3.0-x64-ltsc2016 `
+rebnis/firebird `
 backup myDb1.fdb myBackup1.fbk
 ```
 
@@ -45,7 +43,7 @@ backup myDb1.fdb myBackup1.fbk
 ```powershell
 docker run -it `
 -v D:\Databases:C:\Data `
-rebnis/firebird:3.0-x64-ltsc2016 `
+rebnis/firebird `
 restore myBackup1.fbk newMyDb1.fdb
 ```
 
@@ -83,28 +81,9 @@ gbak -r -rep -p 8192 -user SYSDBA -pas masterkey -se localhost:service_mgr c:\da
 
 WireCrypt is set to Enabled in 3.0 image.
 
-If you are using SQL Manager or other similar tool to access the database, make sure to select protocol TCP/IP instead of local. You might also have to download fbclient.dll manually and place in folder where SQL Manager can find it. File is available in the zip-packages on Firebirds homepage, link below.
-
-## Tags
-
-All tags are based on windowsservercore and are named: 
-FirebirdVersion-FirebirdArchitecture-WindowsVersion-ImageVersion
-
-* 3.0-x64-ltsc2016-i1
-* 2.5-x64-ltsc2016-i1
-* 2.5-x86-ltsc2016-i1
-* 2.0-x86-ltsc2016-i1
-
-No "latest" tag is available.
-
-Image version updates could include additional features to simplify use of the image, without changing the Firebird version.
-
-Firebird 2.0 and 2.5 have been discontinued by the Firebird Project and no new versions will be released. 2.0 image runs 2.0.7 and 2.5 image runs 2.5.9. 
-
-### Image versions
-
-* i1 - 2020-05-23 - Initial release
+If you are using SQL Manager or other similar tool to access the database, make sure to select protocol TCP/IP instead of local. You might also have to download fbclient.dll manually and place in folder where SQL Manager can find it. File is available in the zip-packages on the Firebird homepage, link below.
 
 ## Links
 
 * [Firebird](https://firebirdsql.org/)
+

@@ -17,14 +17,6 @@ Management UI can be reached via http://rabbitmq:15672 (or publish 15672 to loca
 
 Login: guest/guest
 
-## Version
-
-Tag "latest" uses following versions:
-
-* Windows Server 2016 (servercore:ltsc2016)
-* RabbitMQ 3.7.12
-* Erlang 21.2
-
 ## Links
 
 * [RabbitMQ](https://www.rabbitmq.com/)

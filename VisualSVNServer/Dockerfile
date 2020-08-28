@@ -1,5 +1,5 @@
 # escape=`
-FROM mcr.microsoft.com/windows/servercore:ltsc2016 as builder
+FROM mcr.microsoft.com/windows/servercore:ltsc2019 as builder
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
