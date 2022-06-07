@@ -1,5 +1,5 @@
 # escape=`
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -11,7 +11,7 @@ ENV FIREBIRD_HOME="C:\Program Files\Firebird\Firebird_3_0"
 # Install Firebird and set PATH for easy access to Firebird tools
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 ; `
 	Invoke-WebRequest -UseBasicParsing `
-		-Uri "https://github.com/FirebirdSQL/firebird/releases/download/R3_0_6/Firebird-3.0.6.33328_0_x64.exe" `
+		-Uri "https://github.com/FirebirdSQL/firebird/releases/download/v3.0.9/Firebird-3.0.9.33560_0_x64.exe" `
 		-OutFile firebird.exe ; `
 	Start-Process -Wait firebird.exe -ArgumentList /silent ; `
 	Remove-Item -Force firebird.exe ; `
